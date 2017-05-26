@@ -9,7 +9,7 @@
 #import "UIViewController+Debugging.h"
 
 @implementation UIViewController (Debugging)
-- (void)showDebugger
+- (void)toggleDebugger
 {
 #ifdef DEBUG
 #pragma clang diagnostic push

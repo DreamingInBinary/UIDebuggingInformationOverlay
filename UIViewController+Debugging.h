@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (Debugging)
-- (void)showDebugger;
+- (void)toggleDebugger;
 @end
