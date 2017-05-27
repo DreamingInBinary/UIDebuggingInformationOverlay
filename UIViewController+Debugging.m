@@ -9,13 +9,16 @@
 #import "UIViewController+Debugging.h"
 
 @implementation UIViewController (Debugging)
-- (void)showDebugger
+- (void)toggleDebugger
 {
 #ifdef DEBUG
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     id debugClass = NSClassFromString(@"UIDebuggingInformationOverlay");
-    [debugClass performSelector:NSSelectorFromString(@"prepareDebuggingOverlay")];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [debugClass performSelector:NSSelectorFromString(@"prepareDebuggingOverlay")];
+    });
     
     id debugOverlayInstance = [debugClass performSelector:NSSelectorFromString(@"overlay")];
     [debugOverlayInstance performSelector:NSSelectorFromString(@"toggleVisibility")];
